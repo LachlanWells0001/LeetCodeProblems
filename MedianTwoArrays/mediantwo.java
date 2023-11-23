@@ -18,7 +18,7 @@ public class mediantwo {
 
         int medIdx = (x - 1) / 2;
 
-        if (x % 2 == 0) {
+        if ((x & 1) == 0) {
             return (mergedArray[medIdx] + mergedArray[medIdx + 1]) / 2.0;
         } else {
             return (double) mergedArray[medIdx];
