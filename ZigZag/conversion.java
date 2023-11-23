@@ -1,43 +1,31 @@
 class conversion{
     public static String convert(String s, int numRows){
-        if(numRows == 1){return s;}
-        String[] strings = new String[numRows];
-        String output = "";
-        boolean zag = false;
-        int j = 0;
+        if(numRows == 1 || (numRows >= s.length())){return s;}
 
-        for(int i = 0; i < numRows; i++){
-            strings[i] = "";
+        StringBuilder[] rows = new StringBuilder[numRows];
+        for (int i = 0; i < numRows; i++) {
+            rows[i] = new StringBuilder();
         }
 
-        for(int i = 0; i < s.length(); i++){
-            strings[j] += s.charAt(i);
+        int index = 0;
+        int step = -1;
 
-            if(zag){
-                if(j == 0){
-                    zag = false;
-                    j++;
-                }
-                else{
-                    j--;
-                }
+        for (char c : s.toCharArray()) {
+            rows[index].append(c);
+            if (index == 0) {
+                step = 1;
+            } else if (index == numRows - 1) {
+                step = -1;
             }
-            else{
-                if(j == numRows - 1){
-                    zag = true;
-                    j--;
-                }
-                else{
-                    j++;
-                }
-            }
-        }
-        
-        for(int i = 0; i < numRows; i++){
-            output += strings[i];
+            index += step;
         }
 
-        return output;
+        StringBuilder result = new StringBuilder();
+        for (StringBuilder row : rows) {
+            result.append(row.toString());
+        }
+
+        return result.toString();
     }
 
     public static void main(String[] args){
