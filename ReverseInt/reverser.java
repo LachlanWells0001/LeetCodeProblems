@@ -1,29 +1,27 @@
 public class reverser {
     public static int reverse(int x){
-        int sign = Integer.signum(x);
+        int reversed = 0;
 
-        if(sign == 0){return 0;}
+        while (x != 0) {
+            //Get Right Most Digit
+            int digit = x % 10;
 
-        x = Math.abs(x);
+            //Remove Right Most Digit from X
+            x /= 10;
 
-        String s = Integer.toString(x);
-        char[] chars = s.toCharArray();
-        
-        char[] output = new char[chars.length];
-        int i = chars.length - 1;
-        int j = 0;
+            // Check for integer overflow
+            if (reversed > Integer.MAX_VALUE / 10 || (reversed == Integer.MAX_VALUE / 10 && digit > 7)) {
+                return 0;
+            }
+            if (reversed < Integer.MIN_VALUE / 10 || (reversed == Integer.MIN_VALUE / 10 && digit < -8)) {
+                return 0;
+            }
 
-        for(; i >= 0; i--){
-            output[j] = chars[i];
-            j++;
+            //Slide along and add digit
+            reversed = reversed * 10 + digit;
         }
 
-        try{
-            return (Integer.parseInt(new String(output)) * sign);
-        }
-        catch(Exception e){
-            return 0;
-        }
+        return reversed;
     }    
 
     public static void main(String[] args){

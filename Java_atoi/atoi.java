@@ -19,7 +19,7 @@ public class atoi {
         // Read digits until the next non-digit character or the end of the input
         while (index < s.length() && Character.isDigit(s.charAt(index))) {
             
-            // Convert char to int directly
+            // Convert char to int directly thank you ASCII
             int digit = s.charAt(index) - '0';  
 
             // Check for overflow
